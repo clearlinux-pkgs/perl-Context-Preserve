@@ -4,13 +4,14 @@
 #
 Name     : perl-Context-Preserve
 Version  : 0.03
-Release  : 9
+Release  : 10
 URL      : https://cpan.metacpan.org/authors/id/E/ET/ETHER/Context-Preserve-0.03.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/E/ET/ETHER/Context-Preserve-0.03.tar.gz
-Summary  : run code after a subroutine call, preserving the context the subroutine would have seen if it were the last statement in the caller
+Summary  : 'Run code after a subroutine call, preserving the context the subroutine would have seen if it were the last statement in the caller'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-Context-Preserve-license = %{version}-%{release}
+Requires: perl-Context-Preserve-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 BuildRequires : perl(Sub::Uplevel)
 BuildRequires : perl(Test::Exception)
@@ -38,14 +39,24 @@ Group: Default
 license components for the perl-Context-Preserve package.
 
 
+%package perl
+Summary: perl components for the perl-Context-Preserve package.
+Group: Default
+Requires: perl-Context-Preserve = %{version}-%{release}
+
+%description perl
+perl components for the perl-Context-Preserve package.
+
+
 %prep
 %setup -q -n Context-Preserve-0.03
+cd %{_builddir}/Context-Preserve-0.03
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -55,7 +66,7 @@ else
 fi
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
@@ -64,7 +75,7 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-Context-Preserve
-cp LICENCE %{buildroot}/usr/share/package-licenses/perl-Context-Preserve/LICENCE
+cp %{_builddir}/Context-Preserve-0.03/LICENCE %{buildroot}/usr/share/package-licenses/perl-Context-Preserve/973aaa05e5ca98e0c9a650dfbb020c7324946df6
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -77,7 +88,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/Context/Preserve.pm
 
 %files dev
 %defattr(-,root,root,-)
@@ -85,4 +95,8 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/perl-Context-Preserve/LICENCE
+/usr/share/package-licenses/perl-Context-Preserve/973aaa05e5ca98e0c9a650dfbb020c7324946df6
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/Context/Preserve.pm
