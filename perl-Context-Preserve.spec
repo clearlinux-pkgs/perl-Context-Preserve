@@ -4,7 +4,7 @@
 #
 Name     : perl-Context-Preserve
 Version  : 0.03
-Release  : 17
+Release  : 18
 URL      : https://cpan.metacpan.org/authors/id/E/ET/ETHER/Context-Preserve-0.03.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/E/ET/ETHER/Context-Preserve-0.03.tar.gz
 Summary  : 'Run code after a subroutine call, preserving the context the subroutine would have seen if it were the last statement in the caller'
@@ -99,4 +99,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.34.0/Context/Preserve.pm
+/usr/lib/perl5/*
