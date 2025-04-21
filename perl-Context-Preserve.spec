@@ -7,7 +7,7 @@
 #
 Name     : perl-Context-Preserve
 Version  : 0.03
-Release  : 26
+Release  : 27
 URL      : https://cpan.metacpan.org/authors/id/E/ET/ETHER/Context-Preserve-0.03.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/E/ET/ETHER/Context-Preserve-0.03.tar.gz
 Summary  : 'Run code after a subroutine call, preserving the context the subroutine would have seen if it were the last statement in the caller'
